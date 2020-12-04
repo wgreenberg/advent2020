@@ -18,11 +18,10 @@ test_data = [
 ]
 
 raise "pt1 example fail" unless test_data
-  .filter { |parts| is_valid_pt1(parts[0], parts[1]) }
+  .filter { |rule, password| is_valid_pt1(rule, password) }
   .map { |parts| parts[1] } == ["abcde", "ccccccccc"]
 
-valid = data.filter_map { |parts| is_valid_pt1(parts[0], parts[1]) }
-puts valid.count
+puts data.count { |rule, password| is_valid_pt1(rule, password) }
 
 def is_valid_pt2(rule, password)
   range, char = rule.split
@@ -33,7 +32,6 @@ def is_valid_pt2(rule, password)
 end
 
 raise "pt2 example fail" unless test_data
-  .filter_map { |parts| is_valid_pt2(parts[0], parts[1]) } == ["abcde"]
+  .filter_map { |rule, password| is_valid_pt2(rule, password) } == ["abcde"]
 
-valid = data.filter_map { |parts| is_valid_pt2(parts[0], parts[1]) }
-puts valid.count
+puts data.count { |rule, password| is_valid_pt2(rule, password) }

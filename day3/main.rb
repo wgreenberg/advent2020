@@ -15,7 +15,7 @@ data = File.open("day3/input")
 
 def count_trees(lines, n_over, n_down)
   lines.each_with_index
-    .filter { |line, idx| idx % n_down == 0 && line.is_tree((idx * n_over)/n_down) }.length
+    .count { |line, idx| idx % n_down == 0 && line.is_tree((idx * n_over)/n_down) }
 end
 
 puts count_trees(data, 3, 1)
