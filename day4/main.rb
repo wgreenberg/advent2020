@@ -13,18 +13,13 @@ end
 puts into_passports(File.open("day4/input").read)
   .count { |passport| has_valid_fields(passport) }
 
-def valid_height(value)
-  return value.to_i.between?(150, 193) if value.end_with? "cm"
-  return value.to_i.between?(59, 76) if value.end_with? "in"
-  false
-end
-
 def validate_passport_fields(passport)
   passport.all? do |field, value|
     next value.to_i.between?(1920, 2002) if field == "byr"
     next value.to_i.between?(2010, 2020) if field == "iyr"
     next value.to_i.between?(2020, 2030) if field == "eyr"
-    next valid_height(value) if field == "hgt"
+    next value.to_i.between?(150, 193) if field == "hgt" && value.end_with?("cm")
+    next value.to_i.between?(59, 76) if field == "hgt" && value.end_with?("in")
     next /#[a-f0-9]{6}/.match? value if field == "hcl"
     next ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"].include? value if field == "ecl"
     next value.length == 9 && value.to_i != 0 if field == "pid"
