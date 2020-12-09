@@ -3,8 +3,8 @@ numbers = File.open("day1/input")
   .map(&:chomp!)
   .map(&:to_i)
 
-pair = numbers.combination(2).select { |pair| pair.sum == 2020 }.first
+pair = numbers.combination(2).find { |pair| pair.sum == 2020 }
 puts pair.reduce(1, :*)
 
-triple = numbers.combination(3).select { |triple| triple.sum == 2020 }.first
+triple = numbers.combination(3).find { |triple| triple.sum == 2020 }
 puts triple.reduce(1, :*)
